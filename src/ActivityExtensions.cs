@@ -6,6 +6,9 @@ namespace MakeSimple.Logging
     {
         public static string GetSpanId(this Activity activity)
         {
+            if (activity == null)
+                return string.Empty;
+
             return activity.IdFormat switch
             {
                 ActivityIdFormat.Hierarchical => activity.Id,
@@ -16,6 +19,9 @@ namespace MakeSimple.Logging
 
         public static string GetTraceId(this Activity activity)
         {
+            if (activity == null)
+                return string.Empty;
+
             return activity.IdFormat switch
             {
                 ActivityIdFormat.Hierarchical => activity.RootId,
@@ -26,6 +32,9 @@ namespace MakeSimple.Logging
 
         public static string GetParentId(this Activity activity)
         {
+            if (activity == null)
+                return string.Empty;
+
             return activity.IdFormat switch
             {
                 ActivityIdFormat.Hierarchical => activity.ParentId,
