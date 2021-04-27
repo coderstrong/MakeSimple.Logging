@@ -1,0 +1,10 @@
+version: 0.0.{build}
+branches:
+  only:
+  - main
+skip_non_tags: true
+image: Visual Studio 2019
+platform: Any CPU
+build:
+  project: src/MakeSimple.Logging.csproj
+  verbosity: minimal
