@@ -4,6 +4,9 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <SonarQubeExclude>True</SonarQubeExclude>
     <Version>0.0.1</Version>
+    <PackageIcon>logo.png</PackageIcon>
+    <NeutralLanguage>en</NeutralLanguage>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +17,13 @@
     <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
     <PackageReference Include="Serilog.Sinks.Map" Version="1.0.2" />
     <PackageReference Include="System.Text.Json" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\assets\logo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
