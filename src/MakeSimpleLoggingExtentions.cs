@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
 
@@ -6,7 +7,7 @@ namespace MakeSimple.Logging
 {
     public static class MakeSimpleLoggingExtentions
     {
-        public static IServiceCollection AddLoggingSystem(this IServiceCollection services, LoggingOption options = null)
+        public static void AddLoggingSystem(this IServiceCollection services, LoggingOption options = null)
         {
             if (options == null)
             {
@@ -17,7 +18,7 @@ namespace MakeSimple.Logging
                 .WriteTo
                 .Map(evt => evt.Level, (level, wt) =>
                     wt.File(new LoggingFormat(), options.Path + "/Logs/" + level + "-.log", rollingInterval: RollingInterval.Day, fileSizeLimitBytes: options.FileSizeLimit)
-                );
+                ).Enrich.FromLogContext();
 
             if (options.IsEnableTracing)
             {
@@ -50,8 +51,11 @@ namespace MakeSimple.Logging
             ILoggerFactory loggerFactory = new LoggerFactory();
             loggerFactory = loggerFactory.AddSerilog(Log.Logger);
             services.AddSingleton<ILoggerFactory>(loggerFactory);
+        }
 
-            return services;
+        public static void AddMakeSimpleLoging(this IApplicationBuilder app)
+        {
+            app.UseMiddleware<LoggingMiddleware>();
         }
     }
 }
