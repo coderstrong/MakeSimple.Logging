@@ -6,5 +6,7 @@ image: Visual Studio 2019
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
+before_build:
+- appveyor-retry dotnet restore -v Minimal
 build:
   verbosity: minimal
