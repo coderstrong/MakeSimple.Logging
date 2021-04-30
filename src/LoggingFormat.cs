@@ -32,7 +32,6 @@ namespace MakeSimple.Logging
             if (logEvent == null) throw new ArgumentNullException(nameof(logEvent));
             if (output == null) throw new ArgumentNullException(nameof(output));
 
-            logEvent.AddOrUpdateProperty(new LogEventProperty("Date", new ScalarValue(logEvent.Timestamp.ToString("yyyy-MM-ddTHH:mm:fffZ"))));
             logEvent.AddOrUpdateProperty(new LogEventProperty("Level", new ScalarValue(logEvent.Level.ToString())));
             if (logEvent.Exception != null)
                 logEvent.AddOrUpdateProperty(new LogEventProperty("Exception", new ScalarValue(logEvent.Exception.ToString())));

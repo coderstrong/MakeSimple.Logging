@@ -19,12 +19,11 @@ namespace MakeSimple.Logging
 
         public async Task InvokeAsync(HttpContext context)
         {
-            LogContext.PushProperty("Path", context.Request.Path);
             LogContext.PushProperty("Method", context.Request.Method);
             LogContext.PushProperty("QueryString", context.Request.QueryString.ToString());
-            // check if the Request is a POST call 
+            // check if the Request is a POST|PUT call 
             // since we need to read from the body
-            if (context.Request.Method == "POST")
+            if (context.Request.Method == "POST" || context.Request.Method == "PUT")
             {
                 context.Request.EnableBuffering();
                 var body = await new StreamReader(context.Request.Body)
