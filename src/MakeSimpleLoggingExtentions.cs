@@ -7,7 +7,7 @@ namespace MakeSimple.Logging
 {
     public static class MakeSimpleLoggingExtentions
     {
-        public static void AddLoggingSystem(this IServiceCollection services, LoggingOption options = null)
+        public static void AddMakeSimpleLoging(this IServiceCollection services, LoggingOption options = null)
         {
             if (options == null)
             {
