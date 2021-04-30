@@ -6,10 +6,11 @@ Make Simple .NET logging config and tracing
 # Get start
 
 Install from Nuget
-$ dotnet add package MakeSimple.Logging
-
-Config Startup.cs
 ```
+$ dotnet add package MakeSimple.Logging
+```
+Config Startup.cs
+```csharp
 public void ConfigureServices(IServiceCollection services)
 {
   ...
