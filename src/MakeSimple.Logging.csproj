@@ -3,16 +3,21 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <SonarQubeExclude>True</SonarQubeExclude>
-    <Version>0.1.3</Version>
+    <Version>0.1.4</Version>
     <PackageIcon>logo.png</PackageIcon>
     <NeutralLanguage>en</NeutralLanguage>
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <RepositoryUrl>https://github.com/coderstrong/MakeSimple.Logging</RepositoryUrl>
     <RepositoryType>Github</RepositoryType>
     <PackageProjectUrl>https://github.com/coderstrong/MakeSimple.Logging</PackageProjectUrl>
+    <Authors>JohnnyTran</Authors>
+    <Company>MakeSimple</Company>
+    <Description>MakeSimple.Logging .NET logging config and tracing in microservices architecture</Description>
+    <Copyright>JohnnyTran</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Serilog" Version="2.10.0" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
