@@ -1,5 +1,6 @@
 # MakeSimple.Logging
-Make Simple .NET logging config and tracing
+
+Make Simple .NET logging config and tracing in microservices architecture
 
 [![Build status](https://ci.appveyor.com/api/projects/status/eau3dun5q5d7wwi9/branch/main?svg=true)](https://ci.appveyor.com/project/coderstrong/makesimple-logging/branch/main) [![NuGet Version](https://img.shields.io/nuget/v/MakeSimple.Logging.svg?style=flat)](https://www.nuget.org/packages/MakeSimple.Logging/) [![NuGet Downloads](https://img.shields.io/nuget/dt/MakeSimple.Logging.svg)](https://www.nuget.org/packages/MakeSimple.Logging/) 
 
@@ -28,6 +29,11 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
   app.AddMakeSimpleLoging();
   ...
 }
+```
+# Add log custom property
+
+```csharp
+LogContext.PushProperty("CustomerInfo", "Example");
 ```
 
 # Log properties
