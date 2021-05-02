@@ -31,7 +31,7 @@ namespace MakeSimple.Logging
         {
             if (logEvent == null) throw new ArgumentNullException(nameof(logEvent));
             if (output == null) throw new ArgumentNullException(nameof(output));
-
+            logEvent.AddOrUpdateProperty(new LogEventProperty("Timestamp", new ScalarValue(logEvent.Timestamp.ToString("yyyy-MM-ddTHH:mm:fffZ"))));
             logEvent.AddOrUpdateProperty(new LogEventProperty("Level", new ScalarValue(logEvent.Level.ToString())));
             if (logEvent.Exception != null)
                 logEvent.AddOrUpdateProperty(new LogEventProperty("Exception", new ScalarValue(logEvent.Exception.ToString())));
@@ -45,25 +45,28 @@ namespace MakeSimple.Logging
 
             var outputBuffer = new ArrayBufferWriter<byte>();
             using (var jDoc = document)
-            using (var jsonWriter = new Utf8JsonWriter(outputBuffer, new JsonWriterOptions { Indented = false, SkipValidation = true }))
+            using (var jWriter = new Utf8JsonWriter(outputBuffer, new JsonWriterOptions { Indented = false, SkipValidation = true }))
             {
-                jsonWriter.WriteStartObject();
+                jWriter.WriteStartObject();
                 if (jDoc != null)
                     foreach (JsonProperty property in jDoc.RootElement.EnumerateObject())
                     {
                         if (!logEvent.Properties.ContainsKey(property.Name))
                         {
-                            property.WriteTo(jsonWriter);
+                            property.WriteTo(jWriter);
                         }
                     }
 
                 foreach (var property in logEvent.Properties)
                 {
-                    jsonWriter.WriteString(property.Key, property.Value.ToString());
+                    jWriter.WriteString(property.Key, property.Value.ToString());
                 }
-                jsonWriter.WriteEndObject();
+                jWriter.WriteEndObject();
             }
-            output.Write(Encoding.UTF8.GetString(outputBuffer.WrittenSpan));
+            var _output = Encoding.UTF8.GetString(outputBuffer.WrittenSpan);
+            _output = _output.Replace("\"\\u0022", "\"")
+                .Replace("\\u0022\"", "\"");
+            output.Write(_output);
         }
 
         private static bool JsonTryPaser(string log, out JsonDocument output)

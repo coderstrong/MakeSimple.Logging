@@ -30,3 +30,33 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 }
 ```
 
+# Log properties
+
+| Property   |      Type      |  Description |
+|----------|:-------------:|------:|
+| Timestamp |  Datetime | [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) |
+| Level |    String   |    |
+| Exception | String |     |
+| Message | String |     |
+| SpanId | String Id | [Trace context](https://www.w3.org/TR/trace-context/)  |
+| TraceId | String Id | [Trace context](https://www.w3.org/TR/trace-context/) |
+| ParentId | String Id | [Trace context](https://www.w3.org/TR/trace-context/) |
+| Method | String |     |
+| QueryString | String |     |
+| Payload | String |     |
+| RequestedOn | Datetime |     |
+| Response | String |     |
+| ResponseCode | String |     |
+| RespondedOn | Datetime |     |
+| ... | ... |     |
+
+# Log level
+
+| Level   |      Value      |  Description |
+|----------|:-------------:|------:|
+| Information |  0 |  |
+| Verbose |  1 |  |
+| Debug |  2 |  |
+| Error |  3 |  |
+| Fatal |  4 |  |
+| Warning |  5 |  |
