@@ -17,7 +17,7 @@ namespace MakeSimple.Logging
             var loggerConfig = new LoggerConfiguration()
                 .WriteTo
                 .Map(evt => evt.Level, (level, wt) =>
-                    wt.File(new LoggingFormat(), options.Path + "/Logs/" + level + "-.log", rollingInterval: RollingInterval.Day, fileSizeLimitBytes: options.FileSizeLimit)
+                    wt.File(new LoggingFormat(), options.Path + "/Logs/" + level + "-.log", rollingInterval: RollingInterval.Day, fileSizeLimitBytes: options.FileSizeLimit, rollOnFileSizeLimit: true)
                 ).Enrich.FromLogContext();
 
             if (options.IsEnableTracing)

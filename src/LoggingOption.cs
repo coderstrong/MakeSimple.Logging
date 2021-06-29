@@ -45,7 +45,7 @@ namespace MakeSimple.Logging
             IsEnableTracing = true;
             IsOffLogSystem = true;
             IsLogConsole = true;
-            FileSizeLimit = 1073741824;
+            FileSizeLimit = 52428800; // 50MB
             Path = Directory.GetCurrentDirectory();
             MinimumLevel = LoggerLevel.Information;
         }
