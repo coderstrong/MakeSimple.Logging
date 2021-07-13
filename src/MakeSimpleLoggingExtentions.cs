@@ -14,11 +14,22 @@ namespace MakeSimple.Logging
                 options = new LoggingOption();
             }
 
-            var loggerConfig = new LoggerConfiguration()
-                .WriteTo
+            var loggerConfig = new LoggerConfiguration().Enrich.FromLogContext();
+
+            if (options.IsOutputJson)
+            {
+                loggerConfig = loggerConfig.WriteTo
                 .Map(evt => evt.Level, (level, wt) =>
-                    wt.File(new LoggingFormat(), options.Path + "/Logs/" + level + "-.log", rollingInterval: RollingInterval.Day, fileSizeLimitBytes: options.FileSizeLimit)
-                ).Enrich.FromLogContext();
+                    wt.File(new LoggingFormat(), options.Path + "/Logs/" + level + "-.log", rollingInterval: RollingInterval.Day, fileSizeLimitBytes: options.FileSizeLimit, rollOnFileSizeLimit: true)
+                );
+            }
+            else
+            {
+                loggerConfig = loggerConfig.WriteTo
+                .Map(evt => evt.Level, (level, wt) =>
+                    wt.File(options.Path + "/Logs/" + level + "-.log", rollingInterval: RollingInterval.Day, fileSizeLimitBytes: options.FileSizeLimit, rollOnFileSizeLimit: true)
+                );
+            }
 
             if (options.IsEnableTracing)
             {
@@ -53,7 +64,7 @@ namespace MakeSimple.Logging
             services.AddSingleton<ILoggerFactory>(loggerFactory);
         }
 
-        public static void AddMakeSimpleLoging(this IApplicationBuilder app)
+        public static void AddMakeSimpleLogingRequest(this IApplicationBuilder app)
         {
             app.UseMiddleware<LoggingMiddleware>();
         }

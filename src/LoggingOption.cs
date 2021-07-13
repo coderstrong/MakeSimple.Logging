@@ -29,6 +29,7 @@ namespace MakeSimple.Logging
         public bool IsEnableTracing { get; set; }
         public bool IsLogConsole { get; set; }
         public bool IsOffLogSystem { get; set; }
+        public bool IsOutputJson { get; set; }
         public long FileSizeLimit { get; set; }
         public string Path { get; set; }
         public LoggerLevel MinimumLevel { get; set; }
@@ -45,6 +46,7 @@ namespace MakeSimple.Logging
             IsEnableTracing = true;
             IsOffLogSystem = true;
             IsLogConsole = true;
+            IsOutputJson = false;
             FileSizeLimit = 1073741824;
             Path = Directory.GetCurrentDirectory();
             MinimumLevel = LoggerLevel.Information;
