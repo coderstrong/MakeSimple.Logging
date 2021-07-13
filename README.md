@@ -10,6 +10,14 @@ Install from Nuget
 ```
 $ dotnet add package MakeSimple.Logging
 ```
+Config Program.cs
+```csharp
+public static void Main(string[] args)
+{
+    Activity.DefaultIdFormat = ActivityIdFormat.W3C;
+    ....
+}
+```
 Config Startup.cs
 ```csharp
 public void ConfigureServices(IServiceCollection services)
